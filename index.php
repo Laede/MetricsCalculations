@@ -23,6 +23,3 @@ $dataCollection = $parser->parseRequestCollection($requestCollection);
 
 $calculator = new MetricsCalculator();
 print_r($calculator->calculate($dataCollection));
-
-
-

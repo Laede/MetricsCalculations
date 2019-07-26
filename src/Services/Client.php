@@ -2,6 +2,8 @@
 
 namespace Supermetrics\Services;
 
+use Supermetrics\Constants\ConstParams;
+
 /**
  * Class Client.
  */
@@ -26,9 +28,13 @@ class Client
             ]);
         }
         else {
+            $urlParams = http_build_query([
+                ConstParams::SL_TOKEN => $params['token'],
+                ConstParams::PAGE => $params['page'],
+            ]);
             curl_setopt_array($ch, [
                 CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_URL => $url.'?sl_token='.$params['token'].'&page='.$params['page']
+                CURLOPT_URL => $url.$urlParams
             ]);
         }
 
