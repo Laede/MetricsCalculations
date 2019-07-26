@@ -5,9 +5,9 @@ namespace Supermetrics\Tools;
 
 
 /**
- * Class Decoder.
+ * Class Parser.
  */
-class Decoder
+class Parser
 {
 
 }
