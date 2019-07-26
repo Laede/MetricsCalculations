@@ -1,72 +1,42 @@
 <?php
 
 namespace Supermetrics\Services;
-use Supermetrics\Constants\ConstParams;
-use Supermetrics\Tools\DataIterator;
 
 /**
  * Class Client.
  */
 class Client
 {
-    use DataIterator;
-
     /**
-     * @var string
+     * @param string $url
+     * @param array  $params
+     * @param bool   $isPost
+     *
+     * @return bool|string
      */
-    private $url;
-    /**
-     * @var array
-     */
-    private $params;
-
-
-    public function __construct()
+    public function request(string $url, array $params, bool $isPost)
     {
-        $this->url = ConstParams::POST_URL;
-        $this->params = [
-            'client_id' => ConstParams::CLIENT_ID,
-            'name' => ConstParams::NAME,
-            'email' => ConstParams::EMAIL
-        ];
-    }
+        $ch = curl_init();
+        if ($isPost) {
+            curl_setopt_array($ch, [
+                CURLOPT_URL => $url,
+                CURLOPT_POST => 1,
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_POSTFIELDS => $params
+            ]);
+        }
+        else {
+            curl_setopt_array($ch, [
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_URL => $url.'?sl_token='.$params['token'].'&page='.$params['page']
+            ]);
+        }
 
-    /**
-     * @return string
-     */
-    public function registerToken(): string
-    {
-        $ch = curl_init($this->url);
-
-        curl_setopt_array($ch, [
-            CURLOPT_POST => 1,
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_POSTFIELDS => $this->params
-        ]);
-
-        $data = json_decode(curl_exec($ch), true);
+        $response = curl_exec($ch);
 
         curl_close($ch);
 
-
-        return $data['data']['sl_token'];
-
-    }
-
-    /**
-     * @param string $token
-     * @param int    $page
-     *
-     * @return array
-     */
-    public function getData(string $token): array
-    {
-        return $this->collectData($token);
-    }
-
-    public function test($collection)
-    {
-        return $this->dateAnalysis($collection);
+        return $response;
     }
 
 }

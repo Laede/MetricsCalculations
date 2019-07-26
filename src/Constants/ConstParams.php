@@ -12,4 +12,14 @@ final class ConstParams
     public const CLIENT_ID = 'ju16a6m81mhid5ue1z3v2g0uh';
     public const EMAIL = 'your@email.address';
     public const NAME = 'Your Name';
+
+    /**
+     * @var array
+     */
+    public static $registerParams = [
+        'client_id' => self::CLIENT_ID,
+        'email' => self::EMAIL,
+        'name' => self::NAME,
+    ];
 }
+
