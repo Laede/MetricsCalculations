@@ -1,25 +1,21 @@
 <?php
 
-use Supermetrics\Constants\ConstParams;
-use Supermetrics\Services\Client;
+use Supermetrics\Http\CurlClient;
+use Supermetrics\SupermetricsApi\Api;
+use Supermetrics\SupermetricsApi\User;
 use Supermetrics\Tools\MetricsCalculator;
 use Supermetrics\Tools\Parser;
 
 require __DIR__.'/vendor/autoload.php';
 
-$client = new Client();
 
-$token = $client->request(
-    ConstParams::POST_URL,
-    ConstParams::$registerParams,
-    true
+$client = new CurlClient('https://api.supermetrics.com/assignment');
+$user = new User(
+    'ju16a6m81mhid5ue1z3v2g0uh',
+    'Your Name',
+    'your@email.address'
 );
-
-$parser = new Parser();
-$token = $parser->parseToken($token);
-
-$requestCollection = $parser->collectRequest($client, $token, 10);
-$dataCollection = $parser->parseRequestCollection($requestCollection);
-
+$api = new Api($client, $user);
 $calculator = new MetricsCalculator();
-print_r($calculator->calculate($dataCollection));
+$data = $api->getPosts();
+print_r($calculator->calculate($data));
