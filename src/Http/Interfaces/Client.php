@@ -7,7 +7,7 @@ namespace Supermetrics\Http\Interfaces;
 use Supermetrics\Http\RequestException;
 use Supermetrics\Http\Response;
 
-interface ClientInterface
+interface Client
 {
     /**
      * @param string $uri

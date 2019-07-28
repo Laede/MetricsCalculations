@@ -15,25 +15,20 @@ class Token
     private $slToken;
 
     /**
-     * @var string
+     * @var User
      */
-    private $clientId;
-
-    /**
-     * @var string
-     */
-    private $email;
+    private $user;
 
     /**
      * Token constructor.
      *
-     * @param array $array
+     * @param string $slToken
+     * @param User $user
      */
-    public function __construct(array $array)
+    public function __construct(string $slToken, User $user)
     {
-        $this->slToken = $array['sl_token'];
-        $this->clientId = $array['client_id'];
-        $this->email = $array['email'];
+        $this->slToken = $slToken;
+        $this->user = $user;
     }
 
     /**
@@ -41,7 +36,7 @@ class Token
      */
     public function getEmail(): string
     {
-        return $this->email;
+        return $this->user->getEmail();
     }
 
     /**
@@ -49,7 +44,15 @@ class Token
      */
     public function getClientId(): string
     {
-        return $this->clientId;
+        return $this->user->getClientId();
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->user->getName();
     }
 
     /**

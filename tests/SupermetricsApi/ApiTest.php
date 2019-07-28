@@ -21,6 +21,5 @@ class ApiTest extends TestCase
         $calculator = new MetricsCalculator();
         $data = $api->getPosts();
         print_r($calculator->calculate($data));
-
     }
 }

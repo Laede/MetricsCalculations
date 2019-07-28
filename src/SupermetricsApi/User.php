@@ -61,4 +61,12 @@ class User
         return $this->email;
     }
 
+    public function toArray()
+    {
+        return [
+            'client_id' => $this->clientId,
+            'email' => $this->email,
+            'name' => $this->name,
+        ];
+    }
 }

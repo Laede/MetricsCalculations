@@ -2,12 +2,12 @@
 
 namespace Supermetrics\Http;
 
-use Supermetrics\Http\Interfaces\ClientInterface;
+use Supermetrics\Http\Interfaces\Client;
 
 /**
  * Class CurlClient.
  */
-class CurlClient implements ClientInterface
+class CurlClient implements Client
 {
     /**
      * @var string

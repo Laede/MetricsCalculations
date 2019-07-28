@@ -24,7 +24,7 @@ class CurlClientTest extends TestCase
     /**
      * @expectedException \Supermetrics\Http\RequestException
      */
-    public function testThrowsExceptionOnFail()
+    public function testThrowsExceptionOnFail(): void
     {
         $client = new CurlClient('https://api.supermetrics.com/assignment');
 
