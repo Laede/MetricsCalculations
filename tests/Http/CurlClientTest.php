@@ -25,4 +25,12 @@ class CurlClientTest extends TestCase
            $this->assertSame($statusCode, $e->getCode());
         }
     }
+
+    public function testReturnResponseOnGoodRequest(): void
+    {
+        $client = new CurlClient('https://api.supermetrics.com/assignment');
+        $user = new User('ju16a6m81mhid5ue1z3v2g0uh', 'Your Name', 'your@email.address');
+        $response = $client->post('/register', $user->toArray());
+        $this->assertNotInstanceOf( RequestException::class, $response);
+    }
 }
