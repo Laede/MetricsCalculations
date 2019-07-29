@@ -18,8 +18,8 @@ $api = new ApiClient($client, $user);
 try {
 $data = $api->getPosts();
 $output = new JsonOutput(
-new MonthlyReport($data),
-new WeeklyReport($data)
+    new MonthlyReport($data),
+    new WeeklyReport($data)
 );
 
 header("Content-Type: application/json");

@@ -3,7 +3,7 @@ version: '2'
 services:
     php:
         container_name: supermetrics-php
-        working_dir: '/var/www/supermetrics'
+        working_dir: '/var/www/MetricsCalculations'
         image: skycop/skycop-php:latest
         environment:
             SSH_AUTH_SOCK: /tmp/agent.sock
@@ -13,6 +13,6 @@ services:
             - './docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini'
             - $SSH_AUTH_SOCK:/tmp/agent.sock
             - '~/.ssh:/root/.ssh'
-            - './:/var/www/supermetrics'
+            - './:/var/www/MetricsCalculations'
         expose:
             - 9000

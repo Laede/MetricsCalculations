@@ -58,6 +58,12 @@ class CurlClient implements Client
         return $this->exec($ch);
     }
 
+    /**
+     * @param      $ch
+     * @param null $opt
+     *
+     * @return mixed
+     */
     private function getInfo($ch,$opt = null)
     {
         $args = array();
